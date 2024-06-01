@@ -26,4 +26,5 @@
     <string name="url">http://192.168.0.147/test/api.php</string>
     <string name="url2">https://jsonplaceholder.typicode.com/posts</string>
     <string name="default_description">Beef Burger Big juicy beef burger with cheese, lettuce, tomato, onions and special sauce!</string>
+    <string name="setting">Setting</string>
 </resources>

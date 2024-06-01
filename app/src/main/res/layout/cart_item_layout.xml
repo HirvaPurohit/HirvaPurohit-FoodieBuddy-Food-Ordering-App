@@ -44,10 +44,34 @@
                 android:layout_below="@+id/cart_item"
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/cart_img"
                 android:text="Textview"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cart_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_below="@+id/cartitem_price"
+                android:layout_toRightOf="@+id/cart_img"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/descriptiontxtview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                />
+
+
 
 
             <ImageView

@@ -26,9 +26,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cartRecycleview"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="400dp"
             android:layout_below="@+id/mycart"
             />
+
+        <TextView
+            android:id="@+id/totalAmountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="Total: ₹0"
+            android:layout_below="@+id/cartRecycleview"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:gravity="center"/>
+
 
         <Button
             android:id="@+id/proccedbtn"

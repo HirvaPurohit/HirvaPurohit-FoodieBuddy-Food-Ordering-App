@@ -1,10 +1,8 @@
 package com.example.foodorderingapp;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.foodorderingapp.Adapters.foodlist_Adapter;
 import com.example.foodorderingapp.Adapters.promotionrecycle_Adapter;
@@ -41,24 +38,7 @@ public class frag_homemenu extends Fragment {
     ArrayList<foodlistData_model> mylistdata;
     String url = "https://foododerappproject.000webhostapp.com/newapi.php";
 
-    public frag_homemenu()  {
-        // Required empty public constructor
-    }
 
-
-    public static frag_homemenu newInstance(String param1, String param2) {
-        frag_homemenu fragment = new frag_homemenu();
-
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @SuppressLint({"MissingInflatedId", "SuspiciousIndentation"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,20 +53,9 @@ public class frag_homemenu extends Fragment {
 
         mylistdata =new ArrayList<>();
 
-//        mylistdata.add(new foodlistData_model(R.drawable.pizza,"Pizza","$150"));
-//        mylistdata.add(new foodlistData_model(R.drawable.burger,"Burger","$100"));
-//        mylistdata.add(new foodlistData_model(R.drawable.cake_c,"Cake","$250"));
-//        mylistdata.add(new foodlistData_model(R.drawable.coffee,"Coffee","$50"));
-//        mylistdata.add(new foodlistData_model(R.drawable.french_fryf,"French Fry","$90"));
-//        mylistdata.add(new foodlistData_model(R.drawable.juis,"Juice","$60"));
-//        mylistdata.add(new foodlistData_model(R.drawable.popcorn_c,"PopCorn","$60"));
-
 
         recycleview_popular.setHasFixedSize(true);
-//      foodlist_Adapter adapter = new foodlist_Adapter(mylistdata);
         recycleview_popular.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
-//      recycleview_popular.setAdapter(adapter);
-
 
         ArrayList<promotion_list> promoListdata = new ArrayList<>();
 
@@ -102,69 +71,15 @@ public class frag_homemenu extends Fragment {
         recycleview_promotion.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
         recycleview_promotion.setAdapter(promoAdapter);
 
-//        request();
         try {
             fetch();
 
         }catch (Exception e){
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-//        addtocartbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                frag_cart fragCart = new frag_cart();
-//
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragCart);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//
-
-//                Intent i = new Intent(getContext(), frag_cart.class);
-//                startActivity(i);
-
-//                SaveCart();
-//            }
-//        });
-
         return  v;
     }
 
-    void request(){
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-//                textView.setText("Response "+response);
-                String nmnmn="";
-                try {
-//                    JSONArray datas = new JSONArray(response);
-
-                    /*for (int x=0;x<datas.length();x++)
-                    {*/
-                    JSONObject object = new JSONObject(response);
-                    JSONArray ae = object.getJSONArray("name");
-//                         nmnmn = object.get("name").toString();
-                    Toast.makeText(getContext(), ""+object, Toast.LENGTH_SHORT).show();
-                    //}
-                    Toast.makeText(getContext(), nmnmn+" err", Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("HOME",e.getMessage());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(stringRequest);
-    }
 
     void fetch(){
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -204,6 +119,7 @@ public class frag_homemenu extends Fragment {
 
     }
 
+
     void popularRecycle_indetail(){
         foodlist_Adapter adapter = new foodlist_Adapter(mylistdata);
         recycleview_popular.setAdapter(adapter);
@@ -214,16 +130,12 @@ public class frag_homemenu extends Fragment {
                 intent.putExtra("ItemName",mylistdata.get(position).getFoodname());
                 intent.putExtra("ItemImge",mylistdata.get(position).getFoodimg());
                 intent.putExtra("ItemDetail",mylistdata.get(position).getFooddetail());
-//                intent.putExtra("Itemquantity",mylistdata.get(position).getFoodqyantity());
+                intent.putExtra("ItemPrice",mylistdata.get(position).getFoodprice());
                 startActivity(intent);
 
             }
 
-            @Override
-            public void AddToCart(int position) {
 
-                Toast.makeText(getContext(), "Add In Cart Successfully", Toast.LENGTH_SHORT).show();
-            }
         });
 
     }

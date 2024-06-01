@@ -3,15 +3,14 @@ package com.example.foodorderingapp.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.ModelData.foodlistData_model;
+import com.example.foodorderingapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,10 +31,7 @@ public class foodlist_Adapter extends RecyclerView.Adapter<foodlist_Adapter.View
     public interface OnItemClickListener{
 
 
-        //        void OnAddQuantityClick(int position);
         void OnImageClick(int position);
-        void AddToCart(int position);
-//        void onItemclick(int position);
 
     }
     @NonNull
@@ -67,14 +63,13 @@ public class foodlist_Adapter extends RecyclerView.Adapter<foodlist_Adapter.View
 
         ImageView imageView;
         TextView nametxt, pricetxt,detailtxt;
-        Button addtocartbtn;
+//        Button addtocartbtn;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.foodimg);
             nametxt = itemView.findViewById(R.id.food_nametxt);
             pricetxt = itemView.findViewById(R.id.pricetxt);
-            addtocartbtn = itemView.findViewById(R.id.addtocart);
             detailtxt = itemView.findViewById(R.id.detailtxt);
 
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -83,30 +78,6 @@ public class foodlist_Adapter extends RecyclerView.Adapter<foodlist_Adapter.View
                     listener.OnImageClick(getAdapterPosition());
                 }
             });
-
-            addtocartbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.AddToCart(getAdapterPosition());
-                }
-            });
-//        Addquantityimg = itemView.findViewById(R.id.plus_quantity_img);
-
-//            imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.OnImageClick(getAdapterPosition());
-//
-//            }
-//        });
-
-//        Addquantityimg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.OnAddQuantityClick(getAdapterPosition());
-//            }
-//        });
-
 
 
         }

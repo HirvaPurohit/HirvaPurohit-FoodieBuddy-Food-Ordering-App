@@ -1,12 +1,13 @@
 package com.example.foodorderingapp;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -44,9 +45,9 @@ public class HomeActivity extends AppCompatActivity {
 
                         selected = new frag_cart();
 
-                    } else if (item.getItemId() == R.id.user_nav) {
+                    } else if (item.getItemId() == R.id.setting_nav) {
 
-                        selected = new frag_profile();
+                        selected = new frag_setting();
 
                     }
 

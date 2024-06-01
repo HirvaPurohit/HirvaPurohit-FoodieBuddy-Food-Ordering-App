@@ -53,12 +53,14 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/food_nametxt"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:gravity="center"
+
                 >
 
                 <TextView
@@ -66,20 +68,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="$20"
+                    android:text="RS.20"
                     android:textSize="20sp"
                     />
 
-                <Button
-                    android:id="@+id/addtocart"
-                    android:layout_width="110dp"
-                    android:layout_height="45dp"
-                    android:text="Add to Cart"
-                    android:backgroundTint="@color/yellow"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="10sp" />
-            </LinearLayout>
+                </LinearLayout>
         </RelativeLayout>
 
 

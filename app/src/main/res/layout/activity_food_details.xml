@@ -49,6 +49,7 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
@@ -83,13 +84,29 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/pricetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:text="₹20"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tvdetailtag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="390dp"
         android:layout_marginLeft="10dp"
+        android:layout_below="@+id/pricetxt"
         android:textColor="@color/black"
         />
 
@@ -97,7 +114,8 @@
         android:id="@+id/descriptiontxtview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
+        android:layout_below="@+id/tvdetailtag"
+        android:layout_marginTop="10dp"
         android:text="@string/default_description"
         android:textSize="20sp"
         android:textColor="@color/black"

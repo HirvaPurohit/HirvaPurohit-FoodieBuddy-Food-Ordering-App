@@ -1,6 +1,5 @@
 package com.example.foodorderingapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -26,14 +29,13 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etfullnameRP,etemailRP,etphoneRP,etPasswordRP;
    FirebaseAuth mAuth;
    ProgressBar progressBar;
+   DatabaseReference databaseReference;
 
-
-    @SuppressLint("MissingInflatedId")
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+//         Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent i = new Intent(getApplicationContext(),HomeActivity.class);
@@ -55,7 +57,8 @@ public class SignUpActivity extends AppCompatActivity {
         etPasswordRP = findViewById(R.id.etPasswordRP);
         progressBar = findViewById(R.id.progressbar);
 
-        mAuth = FirebaseAuth.getInstance();
+         mAuth = FirebaseAuth.getInstance();
+         databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         btnloginRP.setOnClickListener(new View.OnClickListener() {
@@ -67,16 +70,10 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
-
-
         btnsignupRP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
-
+            progressBar.setVisibility(View.VISIBLE);
 
                 String name = etfullnameRP.getText().toString();
                 String email = etemailRP.getText().toString();
@@ -87,32 +84,50 @@ public class SignUpActivity extends AppCompatActivity {
                 SharedPreferences.Editor  editor = sharedPreferences.edit();
 
 
-
                 if(name.equals("") || email.equals("") || phone.equals("") || password.equals("") ){
                     Toast.makeText(SignUpActivity.this,"Please Enter Data",Toast.LENGTH_SHORT).show();
                 }
+                else{
 
-                    editor.putString("Name",name);
-                    editor.putString("Email",email);
-                    editor.putString("Phone",phone);
-//                    editor.putBoolean("login",true);
-                    editor.apply();
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(SignUpActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SignUpActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+
+                                        HashMap<String,Object> userdataMap = new HashMap<>();
+                                        userdataMap.put("fullname",name);
+                                        userdataMap.put("email",email);
+                                        userdataMap.put("password",password);
+
+                                        databaseReference.child("users").child(phone).updateChildren(userdataMap);
+
+                                        editor.putString("Name",name);
+                                        editor.putString("Email",email);
+                                        editor.putString("Phone",phone);
+                                        editor.putBoolean("login",true);
+                                        editor.apply();
+
+                                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                                        startActivity(i);
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
 
+
+
+                }
+
+
+//
 
 
             }
@@ -120,4 +135,5 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
 }

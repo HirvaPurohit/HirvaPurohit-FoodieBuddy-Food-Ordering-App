@@ -26,9 +26,9 @@
 
 
     <item
-        android:id="@+id/user_nav"
-        android:title="@string/profile"
-        android:icon="@drawable/user"
+        android:id="@+id/setting_nav"
+        android:title="@string/setting"
+        android:icon="@drawable/settings"
         app:showAsAction="ifRoom"
         />
 
